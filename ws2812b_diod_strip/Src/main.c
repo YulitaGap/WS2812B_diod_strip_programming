@@ -166,14 +166,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	//  init_timing();
-	for (int i = 0; i < 60; i++) {
-		send_byte(0x00);
-		send_byte(0x00);
-		send_byte(0x00);
-	}
-	HAL_Delay(1);
-//	volatile int ttt = SystemCoreClock;
 	while (1) {
 		for (int i = 0; i < 20; i++) {
 			if(i%2 == 0){
