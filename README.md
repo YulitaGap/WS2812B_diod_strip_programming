@@ -6,7 +6,7 @@ The final goal of our project is to create an interactive clothes for bicycle ri
 Future goal : make accelerator connected with strip via Bluetooth module.
  
 Current goal : 
-make diod lightened when accelerator's  in movement.
+make diod lightened when accelerator is  in movement.
 
 Current project components:
  - STM32F411E-DISCOVERY
@@ -17,7 +17,9 @@ Current project components:
 Project for accelerometer : https://github.com/YulitaGap/WS2812B_diod_strip_programming/tree/master/acceleromerer
 
 
-Project for diod strip: * will be here in 5 minutes*
+Project for diod strip: https://github.com/YulitaGap/WS2812B_diod_strip_programming/tree/master/ws2812b_diod_strip
+
+Scheme for project :  ![Image]()
  
 
 
