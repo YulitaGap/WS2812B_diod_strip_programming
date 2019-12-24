@@ -92,18 +92,10 @@ void MX_USB_HOST_Process(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//inline void init_timing(void){}
-void delay_L(void) {
-	int useconds = 10;
+void delay_asm(uint32_t useconds) {
 	asm volatile("   mov r0, %[useconds]    \n"
 			"1: subs r0, #1            \n"
 			"   bhi 1b                 \n": :[useconds] "r" (useconds): "r0");
-}
-void delay_H(void) {
-	int useconds = 20;
-	asm volatile("   mov r0, %[useconds]    \n"
-			"1: subs r0, #1            \n"
-			"   bhi 1b                 \n":: [useconds] "r" (useconds): "r0");
 }
 
 inline void send_byte(int a) {
@@ -111,14 +103,14 @@ inline void send_byte(int a) {
 		int x = (a >> i) & 1;
 		if (x == 1) {
 			GPIOB->BSRR = GPIO_PIN_8;
-			delay_H();
+			delay_asm(20);
 			GPIOB->BSRR = (uint32_t) GPIO_PIN_8 << 16U;
-			delay_L();
+			delay_asm(10);
 		} else {
 			GPIOB->BSRR = GPIO_PIN_8;
-			delay_L();
+			delay_asm(10);
 			GPIOB->BSRR = (uint32_t) GPIO_PIN_8 << 16U;
-			delay_H();
+			delay_asm(20);
 
 		}
 	}
@@ -166,6 +158,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	for (int i = 0; i < 60; i++) {
+		send_byte(0x00);
+		send_byte(0x00);
+		send_byte(0x00);
+	}
+	HAL_Delay(1);
 	while (1) {
 		for (int i = 0; i < 20; i++) {
 			if(i%2 == 0){
@@ -276,3 +274,4 @@ void assert_failed(uint8_t *file, uint32_t line)
 #endif /* USE_FULL_ASSERT */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
