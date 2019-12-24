@@ -19,7 +19,7 @@ Project for accelerometer : https://github.com/YulitaGap/WS2812B_diod_strip_prog
 
 Project for diod strip: https://github.com/YulitaGap/WS2812B_diod_strip_programming/tree/master/ws2812b_diod_strip
 
-Scheme for project :  *will be here in 5 minutes*
+Scheme for project :  ![sheme](https://github.com/YulitaGap/WS2812B_diod_strip_programming/blob/master/media/scheme.png)
  
 
 
