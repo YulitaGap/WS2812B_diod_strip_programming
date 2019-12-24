@@ -103,14 +103,14 @@ inline void send_byte(int a) {
 		int x = (a >> i) & 1;
 		if (x == 1) {
 			GPIOB->BSRR = GPIO_PIN_8;
-			delay_asm(20);
+			delay_asm(20); //high_delay
 			GPIOB->BSRR = (uint32_t) GPIO_PIN_8 << 16U;
-			delay_asm(10);
+			delay_asm(10); //low delay
 		} else {
 			GPIOB->BSRR = GPIO_PIN_8;
-			delay_asm(10);
+			delay_asm(10); //low delay
 			GPIOB->BSRR = (uint32_t) GPIO_PIN_8 << 16U;
-			delay_asm(20);
+			delay_asm(20);//high_delay
 
 		}
 	}
@@ -158,14 +158,17 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	for (int i = 0; i < 60; i++) {
+	// light on all 60 diodes
+	for (int i = 0; i < 60; i++) { 
 		send_byte(0x00);
 		send_byte(0x00);
 		send_byte(0x00);
 	}
 	HAL_Delay(1);
+
 	while (1) {
 		for (int i = 0; i < 20; i++) {
+			// ligth on all diodes one by one
 			if(i%2 == 0){
 				send_byte(0x00);
 				send_byte(0xFF);
@@ -178,14 +181,10 @@ int main(void)
 			}
 		}
 		HAL_Delay(1);
+
+		MX_USB_HOST_Process();
 	}
 
-	while (1) {
-    /* USER CODE END WHILE */
-    MX_USB_HOST_Process();
-
-    /* USER CODE BEGIN 3 */
-	}
   /* USER CODE END 3 */
 }
 
@@ -274,4 +273,5 @@ void assert_failed(uint8_t *file, uint32_t line)
 #endif /* USE_FULL_ASSERT */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
 
